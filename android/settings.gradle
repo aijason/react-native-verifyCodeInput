@@ -1,0 +1,3 @@
+rootProject.name = 'verifyCodeInput'
+
+include ':app'

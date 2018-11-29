@@ -1,0 +1,77 @@
+# OSX
+#
+.DS_Store
+.vscode
+.tags
+Session.vim
+.scannerwork
+.sonar
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.pbxproj
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+ios/bundle/
+ios/cassecapp.xcodeproj/project.pbxproj
+
+project.xcworkspace
+
+# Android/IntelliJ
+#
+.idea/
+.gradle
+.settings/
+.project
+bin/
+.classpath
+local.properties
+*.iml
+android/app/build/
+android/app/src/main/assets/index.android.bundle*
+android/app/src/main/res/drawable*/node_modules*
+android/app/src/main/res/drawable*/src_assets*
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# BUCK
+buck-out/
+\.buckd/
+#*.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screen11······shots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+
+# VIM
+*.swp
+
+config.json
+jsconfig.json
+
+package-lock.json
+.vscode
