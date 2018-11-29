@@ -11,10 +11,12 @@ import styles from './VerifyCode.style';
 
 const propTypes = {
     onChangeText: PropTypes.func.isRequired, // 验证码实时变化值
+    verifyCodeNum: PropTypes.number.isRequired, // 验证码数
 };
 
 const defaultProps = {
     onChangeText: () => {},
+    verifyCodeNum: 6, // 默认6位
 };
 
 // 验证码组件
@@ -35,7 +37,8 @@ class VerifyCode extends PureComponent {
     }
 
     renderVerifyCode(value) {
-        const paddedValue = lodash.padEnd(value, 6, ' ');
+        const { verifyCodeNum } = this.props;
+        const paddedValue = lodash.padEnd(value, verifyCodeNum, ' ');
         const valueArray = paddedValue.split('');
         return (
             <TouchableOpacity
@@ -46,7 +49,7 @@ class VerifyCode extends PureComponent {
                 {valueArray.map((digit, index) => (
                     <View
                         key={index}
-                        style={[styles.textInputItem, { borderBottomColor: digit === ' ' ? '#888888' : '#282828' }]}
+                        style={digit === ' ' ? styles.textInputItem : styles.textInputItemIn}
                     >
                         <Text style={styles.verifyText}>{digit}</Text>
                     </View>
@@ -57,28 +60,26 @@ class VerifyCode extends PureComponent {
 
     render() {
         const { verifyCode } = this.state;
-        const { onChangeText } = this.props;
+        const { onChangeText, verifyCodeNum } = this.props;
         return (
-            <View style={styles.container}>
-                <View style={styles.verifyContainer}>
-                    {this.renderVerifyCode(verifyCode)}
-                    <TextInput
-                        ref={(ref) => { this.textInput = ref; }}
-                        underlineColorAndroid="transparent"
-                        style={styles.textInput}
-                        autoFocus={true}
-                        keyboardType={'numeric'}
-                        maxLength={6}
-                        onChangeText={(text) => {
-                            const reg = /^[0-9]*$/;
-                            if (reg.test(text)) {
-                                this.setState({ verifyCode: text });
-                                onChangeText(text);
-                            }
-                        }}
-                        value={verifyCode}
-                    />
-                </View>
+            <View style={styles.verifyContainer}>
+                {this.renderVerifyCode(verifyCode)}
+                <TextInput
+                    ref={(ref) => { this.textInput = ref; }}
+                    underlineColorAndroid="transparent"
+                    style={styles.textInput}
+                    autoFocus={true}
+                    keyboardType={'numeric'}
+                    maxLength={verifyCodeNum}
+                    onChangeText={(text) => {
+                        const reg = /^[0-9]*$/;
+                        if (reg.test(text)) {
+                            this.setState({ verifyCode: text });
+                            onChangeText(text);
+                        }
+                    }}
+                    value={verifyCode}
+                />
             </View>
         );
     }
