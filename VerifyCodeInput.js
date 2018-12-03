@@ -11,12 +11,12 @@ import styles from './VerifyCode.style';
 
 const propTypes = {
     onChangeText: PropTypes.func.isRequired, // 验证码实时变化值
-    verifyCodeNum: PropTypes.number.isRequired, // 验证码数
+    verifyCodeLength: PropTypes.number.isRequired, // 验证码数
 };
 
 const defaultProps = {
     onChangeText: () => {},
-    verifyCodeNum: 6, // 默认6位
+    verifyCodeLength: 6, // 默认6位
 };
 
 // 验证码组件
@@ -37,8 +37,8 @@ class VerifyCode extends PureComponent {
     }
 
     renderVerifyCode(value) {
-        const { verifyCodeNum } = this.props;
-        const paddedValue = lodash.padEnd(value, verifyCodeNum, ' ');
+        const { verifyCodeLength } = this.props;
+        const paddedValue = lodash.padEnd(value, verifyCodeLength, ' ');
         const valueArray = paddedValue.split('');
         return (
             <TouchableOpacity
@@ -60,17 +60,18 @@ class VerifyCode extends PureComponent {
 
     render() {
         const { verifyCode } = this.state;
-        const { onChangeText, verifyCodeNum } = this.props;
+        const { onChangeText, verifyCodeLength } = this.props;
         return (
             <View style={styles.verifyContainer}>
                 {this.renderVerifyCode(verifyCode)}
                 <TextInput
                     ref={(ref) => { this.textInput = ref; }}
                     underlineColorAndroid="transparent"
+                    caretHidden
                     style={styles.textInput}
                     autoFocus={true}
                     keyboardType={'numeric'}
-                    maxLength={verifyCodeNum}
+                    maxLength={verifyCodeLength}
                     onChangeText={(text) => {
                         const reg = /^[0-9]*$/;
                         if (reg.test(text)) {

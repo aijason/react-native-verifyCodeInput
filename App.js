@@ -30,7 +30,7 @@ export default class App extends Component<Props> {
           {/* 验证码输入框 */}
         <VerifyCode
             ref={(ref) => { this.verifyCode = ref; }}
-            verifyCodeNum={6}
+            verifyCodeLength={6}
             onChangeText={text => this.onChangeVerifyCode(text)}
         />
       </ScrollView>
